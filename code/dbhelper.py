@@ -81,11 +81,11 @@ class DBHelper(object):
         if andcond:
             syn = " and " if len(andcond) > 1 else ""
             fields = syn.join(map(lambda x: "{0}=?".format(x), andcond.keys()))
-            value = andcond.values() 
+            value = tuple(andcond.values())
         if orcond:
-            syn = " or " if len(andcond) > 1 else ""
+            syn = " or " if len(orcond) > 1 else ""
             fields += syn.join(map(lambda x: "{0}=?".format(x), orcond.keys()))
-            value += orcond.values()
+            value += tuple(orcond.values())
         if fields:
             sql = "select * from {0} where {1} limit {2}, {3}".format(self.table, fields, page_size * page_index, page_size)
         else:
