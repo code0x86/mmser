@@ -57,7 +57,10 @@ class DBHelper(object):
         """
         fields = ",".join(map(lambda x: "{0}=?".format(x), value.keys()))
         condition = ",".join(map(lambda x: "{0}=?".format(x), key.keys()))
-        sql = "update {0} set {1} where {2}".format(self.table, fields, condition)
+        if key:
+            sql = "update {0} set {1} where {2}".format(self.table, fields, condition)
+        else:
+            sql = "update {0} set {1}".format(self.table, fields)
         v = value.values()
         v.extend(key.values())
         r = self.conn.execute(sql, tuple(v))

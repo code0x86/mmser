@@ -49,6 +49,9 @@ def fav(_id, b):
     """
     with dbh(FAVTABLE) as db:
         value = {"fmid": _id}
+        exists = find(andcond={"id": _id})
+        if not exists:
+            raise Exception("")
         if b:
             r = db.insert(value)
         else:

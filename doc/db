@@ -1,0 +1,33 @@
+fm:
+{
+	id
+	title
+	desc
+	url
+	addon
+	isdefault
+	remark
+	count
+}
+
+favorite:
+{
+	id
+	fmid
+	addon
+}
+
+create table fm(
+       id integer primary key,
+       title varchar(200),
+       desc varchar(800),
+       url varchar(100),
+       remark varchar(500),
+       addon datetime default(datetime('now', 'localtime')),
+       isdefault int default(0),
+       count int default(0));
+
+create table favorite(
+       id integer primary key,
+       fmid int,
+       addon datetime default(datetime('now', 'localtime')));
